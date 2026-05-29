@@ -7,11 +7,12 @@ export interface Props {
 
 const { post } = Astro.props;
 const { title, description, date, tags } = post.data;
+const base = import.meta.env.BASE_URL;
 ---
 
 <article class="blog-card">
   <h2 class="card-title">
-    <a href={`/blog/${post.slug}/`}>{title}</a>
+    <a href={`${base}blog/${post.slug}/`}>{title}</a>
   </h2>
   {
     date && (

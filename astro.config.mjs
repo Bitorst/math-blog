@@ -16,7 +16,7 @@ export default defineConfig({
   markdown: {
     remarkPlugins: [
       remarkMath,
-      remarkWikiLink,
+      [remarkWikiLink, { base }],
       remarkObsidianCallout,
     ],
     rehypePlugins: [rehypeKatex],

@@ -1,13 +1,15 @@
 ---
 import { BLOG_CONFIG, NAV_LINKS } from "../config";
+
+const base = import.meta.env.BASE_URL;
 ---
 
 <header class="site-header">
   <div class="header-inner">
-    <a href="/" class="site-title">{BLOG_CONFIG.title}</a>
+    <a href={base} class="site-title">{BLOG_CONFIG.title}</a>
     <nav class="site-nav">
       {NAV_LINKS.map((link) => (
-        <a href={link.href} class="nav-link">{link.label}</a>
+        <a href={link.href === "/" ? base : `${base}${link.href.slice(1)}`} class="nav-link">{link.label}</a>
       ))}
     </nav>
   </div>

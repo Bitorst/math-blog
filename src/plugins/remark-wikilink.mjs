@@ -20,7 +20,8 @@ function slugify(text) {
 // 匹配 [[...]] 和 ![[...]]
 const WIKILINK_RE = /!?\[\[([^\]]+)\]\]/g;
 
-export function remarkWikiLink() {
+export function remarkWikiLink(opts = {}) {
+  const base = opts.base || "/";
   return function (tree, file) {
     visit(tree, "text", (node, index, parent) => {
       if (!node.value || typeof node.value !== "string") return;
@@ -67,18 +68,19 @@ export function remarkWikiLink() {
             children: [
               {
                 type: "image",
-                url: `/images/${displayName}`,
+                url: base.endsWith("/") ? `${base}images/${displayName}` : `${base}/images/${displayName}`,
                 alt: displayName,
                 title: alias || null,
               },
             ],
           });
         } else {
-          // Regular wikilink
+          // Regular wikilink (prepend base path for deployment)
           const displayText = alias || target;
-          const href = fragment
-            ? `/blog/${slugify(target)}#${fragment}`
-            : `/blog/${slugify(target)}`;
+          const blogPath = fragment
+            ? `blog/${slugify(target)}#${fragment}`
+            : `blog/${slugify(target)}`;
+          const href = base.endsWith("/") ? `${base}${blogPath}` : `${base}/${blogPath}`;
 
           parts.push({
             type: "link",
