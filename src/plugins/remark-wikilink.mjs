@@ -78,8 +78,8 @@ export function remarkWikiLink(opts = {}) {
           // Regular wikilink (prepend base path for deployment)
           const displayText = alias || target;
           const blogPath = fragment
-            ? `blog/${slugify(target)}#${fragment}`
-            : `blog/${slugify(target)}`;
+            ? `blog/${slugify(target)}/#${fragment}`
+            : `blog/${slugify(target)}/`;
           const href = base.endsWith("/") ? `${base}${blogPath}` : `${base}/${blogPath}`;
 
           parts.push({

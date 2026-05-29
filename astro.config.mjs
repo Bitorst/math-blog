@@ -41,7 +41,7 @@ export default defineConfig({
   integrations: [
     expressiveCode(),
     mdx({
-      remarkPlugins: [remarkMath, remarkWikiLink, remarkObsidianCallout],
+      remarkPlugins: [remarkMath, [remarkWikiLink, { base: resolvedBase }], remarkObsidianCallout],
       rehypePlugins: [rehypeKatex],
     }),
     sitemap(),
