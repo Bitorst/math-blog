@@ -71,12 +71,12 @@ function getResultPath(url: string) {
 function getResultKind(url: string) {
   const path = getResultPath(url);
 
-  if (/^\/blog\/[^/]+\/?$/.test(path)) return 'Blog note';
-  if (path.startsWith('/blog')) return 'Blog index';
-  if (path.startsWith('/vibe')) return 'Vibe';
-  if (path.startsWith('/projects')) return 'Project';
+  if (/^\/blog\/[^/]+\/?$/.test(path)) return '博客';
+  if (path.startsWith('/blog')) return '博客索引';
+  if (path.startsWith('/vibe')) return '动态';
+  if (path.startsWith('/projects')) return '项目';
 
-  return 'Page';
+  return '页面';
 }
 
 function getResultTitle(result: Awaited<ReturnType<PagefindResult['data']>>) {
@@ -162,7 +162,7 @@ function renderResults(root: HTMLElement, results: Awaited<ReturnType<PagefindRe
     meta.textContent = `${getResultKind(result.url)} - ${getResultPath(result.url)}`;
     match.className = 'site-search-result-match';
     matchLabel.className = 'site-search-result-match-label';
-    matchLabel.textContent = 'Matched passage';
+    matchLabel.textContent = '匹配段落';
     excerpt.className = 'site-search-result-excerpt';
     excerpt.innerHTML = result.excerpt;
 
@@ -248,7 +248,7 @@ export function initSiteSearch() {
         setStatus(
           root,
           resultData.length > 0
-            ? `${resultData.length} result${resultData.length === 1 ? '' : 's'}`
+            ? `${resultData.length} 条结果`
             : root.dataset.searchEmptyLabel || 'No notes found.',
         );
       } catch {

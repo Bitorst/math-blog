@@ -17,7 +17,7 @@ const href = `${basePath}/blog/series/${slug}/`;
 <article class="series-card">
   <div class="series-heading">
     <div>
-      <p>Series</p>
+      <p>系列</p>
       <h2><a href={href}>{name}</a></h2>
     </div>
     <SeriesProgress current={posts.length} total={posts.length} />
@@ -41,7 +41,7 @@ const href = `${basePath}/blog/series/${slug}/`;
   {
     posts.length > 4 && (
       <a class="series-more" href={href}>
-        View {posts.length - 4} more
+        查看剩余 {posts.length - 4} 篇
       </a>
     )
   }

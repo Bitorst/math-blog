@@ -33,13 +33,13 @@ const listId = collapsible ? 'mobile-article-toc-list' : undefined;
   hasItems && (
     <nav
       class:list={['toc-card', 'blog-card', { compact, collapsible, 'can-collapse': canCollapse }]}
-      aria-label="Table of contents"
+      aria-label="目录"
       data-toc-root
       data-font={font}
       data-mobile-toc={collapsible ? '' : undefined}
       data-expanded={collapsible ? 'false' : undefined}
     >
-      <h2>Table of contents</h2>
+      <h2>目录</h2>
       <ol id={listId}>
         {normalizedItems.map((item, index) => (
           <li>
@@ -54,12 +54,12 @@ const listId = collapsible ? 'mobile-article-toc-list' : undefined;
         <button
           class="toc-expand"
           type="button"
-          aria-label="Expand table of contents"
+          aria-label="展开目录"
           aria-expanded="false"
           aria-controls={listId}
           data-toc-expand
         >
-          <span data-expand-label>Show all</span>
+          <span data-expand-label>展开全部</span>
           <i aria-hidden="true" />
         </button>
       )}
@@ -90,10 +90,10 @@ const listId = collapsible ? 'mobile-article-toc-list' : undefined;
         button.setAttribute('aria-expanded', String(nextExpanded));
         button.setAttribute(
           'aria-label',
-          nextExpanded ? 'Collapse table of contents' : 'Expand table of contents',
+          nextExpanded ? '收起目录' : '展开目录',
         );
         if (label) {
-          label.textContent = nextExpanded ? 'Collapse' : 'Show all';
+          label.textContent = nextExpanded ? '收起' : '展开全部';
         }
       });
     }

@@ -60,7 +60,7 @@ const shouldShowTocAction = showTocIcon && tocItems.length > 0;
   <button
     class="mobile-menu-toggle"
     type="button"
-    aria-label="Open navigation menu"
+    aria-label="打开导航菜单"
     aria-expanded="false"
     aria-controls="mobile-nav-menu"
     data-mobile-menu-toggle
@@ -126,12 +126,12 @@ const shouldShowTocAction = showTocIcon && tocItems.length > 0;
       href={site.repository}
       target="_blank"
       rel="noreferrer"
-      aria-label="Open GitHub repository"
+      aria-label="打开 GitHub 仓库"
       title="GitHub"
     >
       <Github size={17} stroke-width={2} />
     </a>
-    <button type="button" data-theme-toggle aria-label="Switch theme">
+    <button type="button" data-theme-toggle aria-label="切换主题">
       <Moon class="theme-icon-moon" size={17} stroke-width={2} />
       <Sun class="theme-icon-sun" size={17} stroke-width={2} />
     </button>
@@ -141,10 +141,10 @@ const shouldShowTocAction = showTocIcon && tocItems.length > 0;
         <button
           class="toc-action"
           type="button"
-          aria-label="Open table of contents"
+          aria-label="打开目录"
           aria-expanded="false"
           aria-controls="mobile-toc-menu"
-          title="Table of contents"
+          title="目录"
           data-mobile-toc-trigger
         >
           <ListTree size={17} stroke-width={2} />
@@ -158,11 +158,11 @@ const shouldShowTocAction = showTocIcon && tocItems.length > 0;
       <nav
         class="mobile-toc-panel"
         id="mobile-toc-menu"
-        aria-label="Article table of contents"
+        aria-label="文章目录"
         data-nav-toc-menu
         data-toc-root
       >
-        <p>Table of contents</p>
+        <p>目录</p>
         <ol>
           {tocItems.map((item, index) => (
             <li>
@@ -255,7 +255,7 @@ const shouldShowTocAction = showTocIcon && tocItems.length > 0;
           toggle.setAttribute('aria-expanded', String(open));
           toggle.setAttribute(
             'aria-label',
-            open ? 'Close navigation menu' : 'Open navigation menu',
+            open ? '关闭导航菜单' : '打开导航菜单',
           );
         };
         const setTocOpen = (open: boolean) => {
@@ -267,7 +267,7 @@ const shouldShowTocAction = showTocIcon && tocItems.length > 0;
           tocTrigger.setAttribute('aria-expanded', String(open));
           tocTrigger.setAttribute(
             'aria-label',
-            open ? 'Close table of contents' : 'Open table of contents',
+            open ? '关闭目录' : '打开目录',
           );
         };
 

@@ -14,19 +14,19 @@ const shortcutLabel = search.shortcut === 'mod+k' ? 'Ctrl K / Cmd K' : search.sh
   class="site-search"
   data-site-search-root
   data-search-max-results={search.maxResults}
-  data-search-idle-label="Start typing to search."
-  data-search-loading-label="Searching..."
-  data-search-empty-label="No notes found."
-  data-search-unavailable-label="Search index is not available yet. Run a production build first."
+  data-search-idle-label="输入关键词开始搜索"
+  data-search-loading-label="搜索中..."
+  data-search-empty-label="未找到相关笔记"
+  data-search-unavailable-label="搜索索引暂不可用，请先执行生产构建"
   data-pagefind-ignore
 >
   <button
     class="site-search-trigger"
     type="button"
-    aria-label="Search site"
+    aria-label="搜索站点"
     aria-expanded="false"
     aria-controls="site-search-dialog"
-    title={`Search (${shortcutLabel})`}
+    title={`搜索 (${shortcutLabel})`}
     data-site-search-trigger
   >
     <Search size={17} stroke-width={2} />
@@ -43,14 +43,14 @@ const shortcutLabel = search.shortcut === 'mod+k' ? 'Ctrl K / Cmd K' : search.sh
     >
       <header class="site-search-head">
         <div>
-          <p id="site-search-title">Search</p>
+          <p id="site-search-title">搜索</p>
           <span>{shortcutLabel}</span>
         </div>
         <button
           class="site-search-close"
           type="button"
-          aria-label="Close search"
-          title="Close search"
+          aria-label="关闭搜索"
+          title="关闭搜索"
           data-site-search-close
         >
           <X size={17} stroke-width={2} />
@@ -68,7 +68,7 @@ const shortcutLabel = search.shortcut === 'mod+k' ? 'Ctrl K / Cmd K' : search.sh
         />
       </label>
 
-      <p class="site-search-status" data-site-search-status>Start typing to search.</p>
+      <p class="site-search-status" data-site-search-status>输入关键词开始搜索</p>
       <ol class="site-search-results" data-site-search-results></ol>
     </section>
   </div>

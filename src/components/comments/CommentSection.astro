@@ -22,8 +22,8 @@ const shouldRender = provider ? canRenderProvider(comments, provider) : false;
   shouldRender && provider && (
     <section class="comment-section" aria-label="Comments" data-comment-path={pathname}>
       <div class="comment-section-heading">
-        <p>Comments</p>
-        <span>Quiet notes for this article.</span>
+        <p>评论</p>
+        <span>这篇文章的留言与讨论。</span>
       </div>
 
       {provider === 'giscus' && <GiscusComment config={comments.giscus} />}

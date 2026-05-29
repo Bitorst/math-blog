@@ -9,8 +9,8 @@ const safeTotal = Math.max(1, total);
 const percent = Math.round((current / safeTotal) * 100);
 ---
 
-<span class="series-progress" aria-label={`${current} published articles`}>
-  <span class="series-progress-copy">{current} published</span>
+<span class="series-progress" aria-label={`已发布 ${current} 篇文章`}>
+  <span class="series-progress-copy">已发布 {current} 篇</span>
   <span class="series-progress-track" aria-hidden="true">
     <span style={`width: ${percent}%`}></span>
   </span>

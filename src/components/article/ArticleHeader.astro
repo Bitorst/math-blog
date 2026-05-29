@@ -33,11 +33,11 @@ const {
   heroImage,
   showHeroImage = true,
   variant = 'default',
-  kicker = 'Notebook entry',
+  kicker = '笔记',
   pathname = Astro.url.pathname,
   showPageView = false,
 } = Astro.props;
-const wordCountLabel = `${wordCount.toLocaleString('en-US')} words`;
+const wordCountLabel = `${wordCount.toLocaleString('zh-CN')} 字`;
 const hasTags = tags.length > 0;
 const hasCategories = categories.length > 0;
 const hasSeries = series.length > 0;
@@ -60,7 +60,7 @@ const basePath = import.meta.env.BASE_URL.replace(/\/$/, '');
           <h1 class="archive-title" data-pagefind-meta="title">
             {title}
           </h1>
-          <div class="meta-line" aria-label="Article metadata">
+          <div class="meta-line" aria-label="文章元数据">
             {date && (
               <span class="meta-item">
                 <FormattedDate date={date} />
@@ -78,11 +78,11 @@ const basePath = import.meta.env.BASE_URL.replace(/\/$/, '');
             )}
           </div>
           {hasGroups && (
-            <div class="group-meta-line" aria-label="Article groups">
+            <div class="group-meta-line" aria-label="文章分组">
               {hasCategories && (
                 <span class="group-meta-item">
                   <Icon name="folder" size={15} />
-                  <span class="group-label">Categories</span>
+                  <span class="group-label">分类</span>
                   <span class="group-list">
                     {categories.map((category) => (
                       <a class="group-link" href={`${basePath}/blog/categories/${category.slug}/`}>
@@ -95,7 +95,7 @@ const basePath = import.meta.env.BASE_URL.replace(/\/$/, '');
               {hasSeries && (
                 <span class="group-meta-item">
                   <Icon name="layers" size={15} />
-                  <span class="group-label">Series</span>
+                  <span class="group-label">系列</span>
                   <span class="group-list">
                     {series.map((item) => (
                       <a class="group-link" href={`${basePath}/blog/series/${item.slug}/`}>
@@ -115,7 +115,7 @@ const basePath = import.meta.env.BASE_URL.replace(/\/$/, '');
       <>
         <h1 data-pagefind-meta="title">{title}</h1>
 
-        <div class="meta-line" aria-label="Article metadata">
+        <div class="meta-line" aria-label="文章元数据">
           {date && (
             <span class="meta-item">
               <FormattedDate date={date} />
@@ -133,11 +133,11 @@ const basePath = import.meta.env.BASE_URL.replace(/\/$/, '');
           )}
         </div>
         {hasGroups && (
-          <div class="group-meta-line" aria-label="Article groups">
+          <div class="group-meta-line" aria-label="文章分组">
             {hasCategories && (
               <span class="group-meta-item">
                 <Icon name="folder" size={15} />
-                <span class="group-label">Categories</span>
+                <span class="group-label">分类</span>
                 <span class="group-list">
                   {categories.map((category) => (
                     <a class="group-link" href={`${basePath}/blog/categories/${category.slug}/`}>
@@ -150,7 +150,7 @@ const basePath = import.meta.env.BASE_URL.replace(/\/$/, '');
             {hasSeries && (
               <span class="group-meta-item">
                 <Icon name="layers" size={15} />
-                <span class="group-label">Series</span>
+                <span class="group-label">系列</span>
                 <span class="group-list">
                   {series.map((item) => (
                     <a class="group-link" href={`${basePath}/blog/series/${item.slug}/`}>
