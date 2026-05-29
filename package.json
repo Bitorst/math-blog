@@ -1,26 +1,53 @@
 {
-  "name": "math-blog",
+  "name": "astro-navfolio",
   "type": "module",
-  "version": "1.0.0",
+  "version": "0.2.0",
+  "engines": {
+    "node": ">=22.12.0"
+  },
   "scripts": {
     "dev": "astro dev",
-    "start": "astro dev",
-    "build": "astro build",
-    "preview": "astro preview"
+    "fonts:ui": "npx tsx scripts/fonts/subset-ui-font.ts",
+    "build": "astro build && npx pagefind --site dist --output-subdir pagefind --root-selector main --exclude-selectors \"[data-pagefind-ignore]\"",
+    "preview": "astro preview",
+    "astro": "astro",
+    "post:new": "npx tsx scripts/new-content.ts blog",
+    "vibe:new": "npx tsx scripts/new-content.ts vibe",
+    "lint": "eslint .",
+    "format": "prettier --write .",
+    "format:check": "npm run lint && prettier --check .",
+    "prepare": "husky"
   },
   "dependencies": {
-    "@astrojs/mdx": "^4.0.0",
+    "@astrojs/mdx": "^5.0.6",
+    "@astrojs/rss": "^4.0.18",
+    "@astrojs/sitemap": "^3.7.2",
     "@chenglou/pretext": "^0.0.7",
-    "astro": "^5.0.0",
-    "katex": "^0.16.0",
-    "mdast-util-to-string": "^4.0.0",
-    "rehype-katex": "^7.0.0",
-    "rehype-stringify": "^10.0.0",
+    "@expressive-code/plugin-collapsible-sections": "^0.42.0",
+    "@expressive-code/plugin-line-numbers": "^0.42.0",
+    "@fontsource/maple-mono": "^5.2.6",
+    "@tailwindcss/vite": "^4.3.0",
+    "astro": "^6.3.5",
+    "astro-expressive-code": "^0.42.0",
+    "katex": "^0.17.0",
+    "lucide-astro": "^0.556.0",
+    "rehype-katex": "^7.0.1",
     "remark-math": "^6.0.0",
-    "remark-parse": "^11.0.0",
-    "unist-util-visit": "^5.0.0"
+    "sharp": "^0.34.5",
+    "smol-toml": "^1.6.1",
+    "tailwindcss": "^4.3.0"
   },
   "devDependencies": {
-    "@types/node": "^20.0.0"
+    "@typescript-eslint/parser": "^8.60.0",
+    "eslint-plugin-deprecation": "^3.0.0",
+    "husky": "^9.1.7",
+    "lint-staged": "^17.0.5",
+    "pagefind": "^1.5.2",
+    "prettier": "^3.8.3",
+    "prettier-plugin-astro": "^0.14.1",
+    "typescript": "^6.0.3"
+  },
+  "lint-staged": {
+    "*": "bun run format:check"
   }
 }

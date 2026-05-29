@@ -1,55 +1,82 @@
 {
-  "$ref": "#/definitions/blog",
-  "definitions": {
-    "blog": {
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "title": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "date": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "draft": {
+      "default": false,
+      "type": "boolean"
+    },
+    "heroImage": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "string",
+          "format": "uri"
+        }
+      ]
+    },
+    "showHeroImage": {
+      "default": true,
+      "type": "boolean"
+    },
+    "tags": {
+      "default": [],
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "categories": {
+      "default": [],
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "series": {
+      "default": [],
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "comments": {
+      "default": true,
+      "type": "boolean"
+    },
+    "sidebar": {
       "type": "object",
       "properties": {
-        "title": {
-          "type": "string"
+        "enable": {
+          "type": "boolean"
         },
-        "description": {
-          "type": "string"
+        "toc": {
+          "type": "boolean"
         },
-        "date": {
-          "anyOf": [
-            {
-              "type": "string",
-              "format": "date-time"
-            },
-            {
-              "type": "string",
-              "format": "date"
-            },
-            {
-              "type": "integer",
-              "format": "unix-time"
-            }
-          ]
-        },
-        "tags": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "default": []
-        },
-        "math": {
-          "type": "boolean",
-          "default": true
-        },
-        "draft": {
-          "type": "boolean",
-          "default": false
-        },
-        "$schema": {
-          "type": "string"
+        "relatedPosts": {
+          "type": "boolean"
         }
-      },
-      "required": [
-        "title"
-      ],
-      "additionalProperties": false
+      }
+    },
+    "$schema": {
+      "type": "string"
     }
   },
-  "$schema": "http://json-schema.org/draft-07/schema#"
+  "required": [
+    "title",
+    "description",
+    "date"
+  ]
 }

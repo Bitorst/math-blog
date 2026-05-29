@@ -1,16 +1,21 @@
 ---
-import BaseLayout from "../layouts/BaseLayout.astro";
-import { BLOG_CONFIG } from "../config";
+import { getCollection, render } from 'astro:content';
+import BlogArticle from '../layouts/BlogArticle.astro';
+
+const [about] = await getCollection('about');
+
+if (!about) {
+  throw new Error('Missing src/content/about.mdx content entry.');
+}
+
+const { Content, headings } = await render(about);
 ---
 
-<BaseLayout>
-  <article class="page-about">
-    <h1>关于</h1>
-    <p>欢迎来到 {BLOG_CONFIG.title}。</p>
-    <p>这里记录了我的数学学习笔记、思考和探索。</p>
-    <h2>关于本站</h2>
-    <p>本博客使用 <a href="https://astro.build" target="_blank" rel="noopener">Astro</a> 构建，支持 LaTeX 数学公式渲染（KaTeX），与 <a href="https://obsidian.md" target="_blank" rel="noopener">Obsidian</a> 笔记工具完美联动。</p>
-    <h2>联系方式</h2>
-    <p>待添加。</p>
-  </article>
-</BaseLayout>
+<BlogArticle
+  post={about}
+  headings={headings}
+  sidebar={{ enable: false, ...about.data.sidebar }}
+  contentFont="ui"
+>
+  <Content />
+</BlogArticle>

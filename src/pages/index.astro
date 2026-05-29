@@ -1,27 +1,44 @@
 ---
-import BaseLayout from "../layouts/BaseLayout.astro";
-import BlogCard from "../components/BlogCard.astro";
-import { getCollection } from "astro:content";
-import { BLOG_CONFIG } from "../config";
+import IntroCard from '../components/cards/IntroCard.astro';
+import NavigationCard from '../components/cards/NavigationCard.astro';
+import ProfileCard from '../components/cards/ProfileCard.astro';
+import DashboardFlow from '../components/layout/DashboardFlow.astro';
+import BlogHeatmap from '../components/widgets/BlogHeatmap.astro';
+import DoingCard from '../components/widgets/DoingCard.astro';
+import { getSiteConfig } from '../data/site';
+import BaseLayout from '../layouts/BaseLayout.astro';
 
-const allPosts = await getCollection("blog", ({ data }) => {
-  // 过滤草稿
-  return !data.draft;
-});
-
-// 按日期排序
-const posts = allPosts.sort(
-  (a, b) => (b.data.date?.getTime() ?? 0) - (a.data.date?.getTime() ?? 0)
-);
+const { home, profile, site } = await getSiteConfig();
 ---
 
-<BaseLayout>
-  <section class="hero">
-    <h1 class="hero-title">{BLOG_CONFIG.title}</h1>
-    <p class="hero-desc">{BLOG_CONFIG.description}</p>
-  </section>
-  <section class="post-list">
-    {posts.length === 0 && <p class="no-posts">还没有文章。</p>}
-    {posts.map((post) => <BlogCard post={post} />)}
-  </section>
+<BaseLayout title={site.pageTitle} description={site.pageDescription}>
+  <div class="publication-bg" aria-hidden="true"></div>
+  <DashboardFlow>
+    <Fragment slot="profile">
+      <ProfileCard profile={profile} />
+    </Fragment>
+
+    <Fragment slot="hero">
+      <IntroCard intro={home.intro} quote={home.quote} />
+    </Fragment>
+
+    <Fragment slot="activity">
+      <BlogHeatmap
+        weeks={home.latest.heatmapWeeks}
+        showLatest={home.latest.showHeatmapLatest}
+        latestCount={home.latest.count}
+        excludeDraft={home.latest.excludeDraft}
+        startDate={home.latest.startDate || null}
+        dateArchiveBaseHref={home.latest.dateArchiveBaseHref || undefined}
+      />
+    </Fragment>
+
+    <Fragment slot="links">
+      <NavigationCard items={home.navigation} />
+    </Fragment>
+
+    <Fragment slot="recently">
+      <DoingCard items={home.doing} />
+    </Fragment>
+  </DashboardFlow>
 </BaseLayout>
