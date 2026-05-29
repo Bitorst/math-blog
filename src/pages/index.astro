@@ -1,0 +1,27 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import BlogCard from "../components/BlogCard.astro";
+import { getCollection } from "astro:content";
+import { BLOG_CONFIG } from "../config";
+
+const allPosts = await getCollection("blog", ({ data }) => {
+  // 过滤草稿
+  return !data.draft;
+});
+
+// 按日期排序
+const posts = allPosts.sort(
+  (a, b) => (b.data.date?.getTime() ?? 0) - (a.data.date?.getTime() ?? 0)
+);
+---
+
+<BaseLayout>
+  <section class="hero">
+    <h1 class="hero-title">{BLOG_CONFIG.title}</h1>
+    <p class="hero-desc">{BLOG_CONFIG.description}</p>
+  </section>
+  <section class="post-list">
+    {posts.length === 0 && <p class="no-posts">还没有文章。</p>}
+    {posts.map((post) => <BlogCard post={post} />)}
+  </section>
+</BaseLayout>

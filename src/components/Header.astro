@@ -1,0 +1,14 @@
+---
+import { BLOG_CONFIG, NAV_LINKS } from "../config";
+---
+
+<header class="site-header">
+  <div class="header-inner">
+    <a href="/" class="site-title">{BLOG_CONFIG.title}</a>
+    <nav class="site-nav">
+      {NAV_LINKS.map((link) => (
+        <a href={link.href} class="nav-link">{link.label}</a>
+      ))}
+    </nav>
+  </div>
+</header>

@@ -1,0 +1,66 @@
+---
+title: "线性代数：特征值与特征向量"
+description: "理解线性代数中的核心概念——特征值与特征向量，以及它们在矩阵对角化中的应用。"
+date: 2026-05-25
+tags: ["线性代数", "特征值", "对角化"]
+math: true
+---
+
+## 定义
+
+设 $A \in \mathbb{C}^{n \times n}$。若存在非零向量 $v \in \mathbb{C}^n$ 和标量 $\lambda \in \mathbb{C}$ 满足：
+
+$$
+A v = \lambda v
+$$
+
+则称 $\lambda$ 为 $A$ 的**特征值**，$v$ 为对应的**特征向量**。
+
+> [!info] 特征多项式
+> $\lambda$ 是 $A$ 的特征值 $\iff$ $\det(A - \lambda I) = 0$。
+> 
+> 多项式 $p(\lambda) = \det(A - \lambda I)$ 称为特征多项式，其次是 $n$ 次多项式。
+
+## 几何意义
+
+特征向量代表了被矩阵 $A$ 作用后**方向不变**的向量，仅被伸缩 $\lambda$ 倍。
+
+对于 $2 \times 2$ 矩阵，考虑：
+
+$$
+A = \begin{pmatrix} 2 & 1 \\ 1 & 2 \end{pmatrix}
+$$
+
+计算其特征值：
+
+$$
+\det(A - \lambda I) = \begin{vmatrix} 2-\lambda & 1 \\ 1 & 2-\lambda \end{vmatrix} = (2-\lambda)^2 - 1 = \lambda^2 - 4\lambda + 3
+$$
+
+解得：$\lambda_1 = 1,\ \lambda_2 = 3$。
+
+> [!example] 对角化示例
+> 当 $A$ 有 $n$ 个线性无关的特征向量时，可以对角化：
+> 
+> $$
+> A = PDP^{-1}
+> $$
+> 
+> 其中 $D$ 是对角矩阵，对角元为特征值。
+
+```python
+import numpy as np
+
+A = np.array([[2, 1], [1, 2]])
+eigenvalues, eigenvectors = np.linalg.eig(A)
+
+print("特征值:", eigenvalues)
+print("特征向量:\n", eigenvectors)
+```
+
+> [!success] 核心结论
+> 对实对称矩阵，不同特征值对应的特征向量**正交**。
+
+## 与数学分析的关联
+
+如果你还没看过 [[math-analysis-limits|极限与连续]]，建议先从基础分析开始。

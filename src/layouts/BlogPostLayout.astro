@@ -1,0 +1,40 @@
+---
+import BaseLayout from "./BaseLayout.astro";
+import type { CollectionEntry } from "astro:content";
+
+export interface Props {
+  entry: CollectionEntry<"blog">;
+}
+
+const { entry } = Astro.props;
+const { Content, remarkPluginFrontmatter } = await entry.render();
+const { title, date, tags } = entry.data;
+---
+
+<BaseLayout>
+  <article class="blog-post">
+    <header class="post-header">
+      <h1 class="post-title">{title}</h1>
+      {
+        date && (
+          <time class="post-date" datetime={date.toISOString()}>
+            {date.toISOString().slice(0, 10)}
+          </time>
+        )
+      }
+      {
+        tags && tags.length > 0 && (
+          <div class="post-tags">
+            {tags.map((tag) => <span class="tag">{tag}</span>)}
+          </div>
+        )
+      }
+    </header>
+    <div class="post-content">
+      <Content />
+    </div>
+    <footer class="post-footer">
+      <a href="/" class="back-link">&larr; 返回首页</a>
+    </footer>
+  </article>
+</BaseLayout>
