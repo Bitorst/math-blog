@@ -7,7 +7,7 @@ import { remarkObsidianCallout } from "./src/plugins/remark-obsidian-callout.mjs
 
 // GitHub Pages 部署路径
 const site = "https://bitorst.github.io";
-const base = "/";
+const base = "/math-blog/";
 
 export default defineConfig({
   site,
