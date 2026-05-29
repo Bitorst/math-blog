@@ -21,7 +21,7 @@ const {
   startDate,
 } = Astro.props;
 const posts = await getCollection('blog', ({ data }) => !excludeDraft || !data.draft);
-const heatmap = createRecentBlogHeatmap(posts, weeks, latestCount, startDate);
+const heatmap = createRecentBlogHeatmap(posts, weeks, latestCount, startDate, import.meta.env.BASE_URL);
 const heatmapLabel = startDate
   ? `${heatmap.startDate} 以来的写作动态`
   : `最近 ${heatmap.weeks} 周的写作动态`;

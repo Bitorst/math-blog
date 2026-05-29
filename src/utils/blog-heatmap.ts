@@ -52,12 +52,22 @@ export function getLevel(count: number): 0 | 1 | 2 | 3 | 4 {
   return 4;
 }
 
-export function getLatestPosts(posts: BlogPost[], count = 1): LatestPost[] {
+function normalizeBase(base?: string) {
+  if (!base || base === '/') return '';
+  return base.replace(/\/$/, '');
+}
+
+function buildHref(postId: string, base?: string) {
+  const prefix = normalizeBase(base);
+  return `${prefix}/blog/${postId}/`;
+}
+
+export function getLatestPosts(posts: BlogPost[], count = 1, base?: string): LatestPost[] {
   return sortByDateDesc(posts)
     .slice(0, Math.max(1, count))
     .map((post) => ({
       title: post.data.title,
-      href: `/blog/${post.id}/`,
+      href: buildHref(post.id, base),
       date: post.data.date,
     }));
 }
@@ -84,7 +94,7 @@ function getConfiguredStartDate(startDate: HeatmapStartDate) {
   return date;
 }
 
-function getPostsByDate(posts: BlogPost[]) {
+function getPostsByDate(posts: BlogPost[], base?: string) {
   const postsByDate = new Map<string, HeatmapPost[]>();
 
   for (const post of posts) {
@@ -92,7 +102,7 @@ function getPostsByDate(posts: BlogPost[]) {
     const existingPosts = postsByDate.get(key) ?? [];
     existingPosts.push({
       title: post.data.title,
-      href: `/blog/${post.id}/`,
+      href: buildHref(post.id, base),
     });
     postsByDate.set(key, existingPosts);
   }
@@ -105,6 +115,7 @@ export function createRecentBlogHeatmap(
   weeks = 12,
   latestCount = 1,
   startDate?: HeatmapStartDate,
+  base?: string,
 ): HeatmapWindow {
   const today = new Date();
   today.setHours(0, 0, 0, 0);
@@ -125,7 +136,7 @@ export function createRecentBlogHeatmap(
     start.setDate(start.getDate() - (safeWeeks - 1) * DAYS_IN_WEEK);
   }
 
-  const postsByDate = getPostsByDate(posts);
+  const postsByDate = getPostsByDate(posts, base);
   const days: HeatmapDay[] = [];
 
   for (let index = 0; index < safeWeeks * DAYS_IN_WEEK; index += 1) {
@@ -160,6 +171,6 @@ export function createRecentBlogHeatmap(
     totalPosts: posts.length,
     activeDays: days.filter((day) => day.count > 0).length,
     currentStreak,
-    latestPosts: getLatestPosts(posts, latestCount),
+    latestPosts: getLatestPosts(posts, latestCount, base),
   };
 }
